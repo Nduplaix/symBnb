@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une annonce{% endblock %}
+
+{% form_theme formulaire _self %}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer une nouvelle annonce</h1>
+        {{ form_start(formulaire) }}
+
+        {{ form_widget(formulaire) }}
+
+
+        <button type="submit" class="btn btn-primary">Créer l'annonce</button>
+
+        {{ form_end(formulaire) }}
+
+    </div>
+{% endblock %}
+
+{% block _ad_images_widget %}
+    {{ form_widget(form) }}
+
+    <div class="form-group">
+        <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block _ad_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.url) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.caption) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#
+{% block form_row %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+
+{% block text_widget %} juste pour les text donc refaire pour tout donc on va faciliter le tout
+    <input type="text" name="{{ full name }}" id="{{ id }}" class='form-control'>
+{% endblock %}
+
+#}
+
+
+{% block javascripts %}
+    <script>
+        $('#add-image').click(function(){
+            //Je recupere le numero des futurs champs que je vais créer
+            const index = $('#ad_images div.form-group').length;
+
+            //Je recupere le protorype des entrée
+            const tmpl = $('#ad_images').data('prototype').replace(/__name__/g, index);
+            //replace(/__name__/g, index) remplace tous les '__name__' par l'index
+
+            //j'injecte ce code dans la div
+            $('#ad_images').append(tmpl);
+
+
+            //Je gère le bouton supprimer
+            handleDeleteButtons();
+        });
+
+        function handleDeleteButtons(){
+            $('button[data-action="delete"]').click(function(){
+                const target= this.dataset.target;
+                $(target).remove();
+            });
+        }
+        // Je gere le bouton supprimer si il y a deja une div d'ouverte
+        handleDeleteButtons();
+    </script>
+{% endblock %}
