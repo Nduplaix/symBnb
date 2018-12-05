@@ -1,26 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'une annonce{% endblock %}
+{% block title %}
+Edition d'une annonce
+{% endblock %}
 
 {% form_theme formulaire _self %}
 
 {% block body %}
     <div class="container">
-        <h1>Créer une nouvelle annonce</h1>
+        {% if edit==false %}
+            <h1>Création d'une annonce</h1>
+        {% else %}
+            <h1>Modifier l'annonce: {{ad.title}}</h1>
+        {% endif %}
+        
         {{ form_start(formulaire) }}
 
         {{ form_widget(formulaire) }}
 
-
-        <button type="submit" class="btn btn-primary">Créer l'annonce</button>
+        {% if edit==false %}
+            <button type="submit" class="btn btn-primary">Créer l'article</button>
+        {% else %}
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        {% endif %}
+        
 
         {{ form_end(formulaire) }}
 
     </div>
 {% endblock %}
 
+
 {% block _ad_images_widget %}
     {{ form_widget(form) }}
+
+    <input type="hidden" id="widget-counter" value="0">
 
     <div class="form-group">
         <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
@@ -38,9 +52,11 @@
                 <div class="row">
                     <div class="col">
                         {{ form_widget(form.url) }}
+                        {{ form_errors(form.url) }}
                     </div>
                     <div class="col">
                         {{ form_widget(form.caption) }}
+                        {{ form_errors(form.caption) }}
                     </div>
                 </div>
             </div>
@@ -50,22 +66,6 @@
         </div>
     </div>
 {% endblock %}
-
-{#
-{% block form_row %}
-    <div class="form-group">
-        {{ form_label(form) }}
-        {{ form_widget(form) }}
-    </div>
-{% endblock %}
-
-
-{% block text_widget %} juste pour les text donc refaire pour tout donc on va faciliter le tout
-    <input type="text" name="{{ full name }}" id="{{ id }}" class='form-control'>
-{% endblock %}
-
-#}
-
 
 {% block javascripts %}
     <script>

@@ -44,7 +44,8 @@ class AdType extends AbstractType
             ->add('price', MoneyType::class, $this->getConfig('Prix par nuit', 'Entrez le prix de location par nuit'))
             ->add('images', CollectionType::class, [
                 'entry_type'=>ImageType::class,//permet de faire plusieurs formulaires ImageType
-                'allow_add'=>true//autorise le fait d'ajouter un formulaire
+                'allow_add'=>true,//autorise le fait d'ajouter un formulaire
+                'allow_delete'=>true
             ])
         ;
     }

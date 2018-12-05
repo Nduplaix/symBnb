@@ -7,9 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks
+ * UniqueEntity(fields={'title','slug'},
+ * message="Une autre annonce possède deja ce titre"
+ * )
  */
 class Ad
 {
@@ -47,6 +53,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
      */
     private $coverImage;
 
@@ -57,6 +64,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
