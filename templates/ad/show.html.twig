@@ -13,7 +13,11 @@
                 <strong>{{ad.rooms}} chambres</strong> pour <strong>{{ad.price}}&euro;</strong>
                 / nuits
             </p>
-            <a href="#" class="btn btn-primary">Réserver</a>
+            {% if (user is same as (app.user)) and (app.user)  %}
+                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-primary">Modifier l'annonce</a>
+            {% else %}
+                <a href="#" class="btn btn-primary">Réserver</a>
+            {% endif %}
         </div>
     </div>
 
@@ -49,20 +53,23 @@
                 </div>
             </div>
             <div class="col">
+                {% set a = ad.author %}
                 <div class="row">
-                    <div class="col-4">
-                        <img src="http://placehold.it/64x64" alt="Avatar">
+                    <div class="col-3">
+                        <a href="{{ path('user_show',{'slug' : a.slug}) }}">
+                            <img class="avatar avatar-medium" src="{{ a.picture }}" alt="Avatar de {{ a.fullName}}">
+                        </a>
                     </div>
                     <div class="col">
-                        <h3>Joseph</h3>
-                        <span class="badge bage-primary">3 annonces</span>
-                    
+                        <a href="{{ path('user_show',{'slug' : a.slug}) }}">
+                            <h3>{{ a.fullName}}</h3>
+                        </a>
+                        <span class="badge badge-primary">{{ a.ads | length }} annonces</span>
+
                     </div>
 
                 </div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi, illo necessitatibus? Minus doloremque et porro provident dicta vel voluptatem! Excepturi?</p>
-                <p>Iure corrupti vero vel natus cupiditate, quis assumenda sed unde officia veniam ullam nostrum, asperiores aliquam placeat quos, odio temporibus!</p>
-                <p>Nulla molestias aperiam assumenda optio totam, dolorem deleniti et, similique, doloribus sunt recusandae asperiores iste repellendus temporibus. Repellat, repellendus non.</p>
+                {{ a.description | raw }}
             </div>
         </div>
     </div>

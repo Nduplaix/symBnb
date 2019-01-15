@@ -22,7 +22,7 @@ class AdType extends AbstractType
      *
      * @param string $label
      * @param string $placeholder
-     * @return arry
+     * @return array
      */    
     private function getConfig($label,$placeholder)
     {
