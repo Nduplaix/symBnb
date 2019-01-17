@@ -29,6 +29,18 @@ class AppFixtures extends Fixture
         $role->setTitle('ROLE_ADMIN');
         $manager->persist($role);
 
+        $adminUser= new User();
+        $adminUser->setFirstName('Nicolas')
+            ->setLastName("Duplaix")
+            ->setEmail('nduplaix62@gmail.com')
+            ->setHash($this->encoder->encodePassword($adminUser,"azerty"))
+            ->setPicture("http://placehold.it/30x30")
+            ->setIntroduction($faker->sentence())
+            ->setDescription($content = "<p>" . join("</p><p>" , $faker->paragraphs(3)) . "</p>")
+            ->addUserRole($role);
+
+        $manager->persist($adminUser);
+
         $users=[];
         $genres=['male', 'female'];
 

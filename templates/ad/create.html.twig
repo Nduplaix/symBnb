@@ -1,23 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Edition d'une annonce
+    Création d'une annonce
 {% endblock %}
 
 {% form_theme formulaire _self %}
 
 {% block body %}
     <div class="container">
-            <h1>Modifier l'annonce: {{ad.title}}</h1>
+            <h1>Création d'une annonce</h1>
 
-        
+
         {{ form_start(formulaire) }}
 
         {{ form_widget(formulaire) }}
 
-            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            <button type="submit" class="btn btn-primary">Créer l'article</button>
 
-        
 
         {{ form_end(formulaire) }}
 

@@ -13,8 +13,10 @@
                 <strong>{{ad.rooms}} chambres</strong> pour <strong>{{ad.price}}&euro;</strong>
                 / nuits
             </p>
-            {% if (user is same as (app.user)) and (app.user)  %}
-                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-primary">Modifier l'annonce</a>
+            {% if (ad.author == (app.user)) and (app.user)  %}
+                <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-secondary">Modifier l'annonce</a>
+                <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger"
+                onclick="return confirm(`Êtes-vous sur de vouloir supprimer l'annonce {{ ad.title }} ?`)">Supprimer l'annonce</a>
             {% else %}
                 <a href="#" class="btn btn-primary">Réserver</a>
             {% endif %}
