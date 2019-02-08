@@ -172,4 +172,17 @@ class AccountController extends AbstractController
          ]);
     }
 
+
+    /**
+     * Permet d'afficher la liste de nos réservations
+     *
+     * @Route("/account/bookings", name="account_bookings")
+     *
+     * @return Response
+     */
+    public function bookings()
+    {
+        return $this->render('account/booking.html.twig');
+    }
+
 }

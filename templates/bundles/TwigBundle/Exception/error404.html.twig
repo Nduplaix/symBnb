@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Oupss! La page que vous recherchez n'existe pas!</h1>
+        <p>On a surement du mal vous renseigner. <br>Vous pouvez retourner à l'accueil !</p>
+        <a href="{{ path('homepage') }}" class="btn btn-primary">Retour à l'accueil</a>
+        <a class="btn btn-success" href="{{ path('ads') }}">Nos annonces</a>
+    </div>
+
+{% endblock %}
